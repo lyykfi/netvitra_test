@@ -1,10 +1,15 @@
-<div className="app" *ngIf="isLoggedIn$ | async; else auth">
-    <app-toolbar></app-toolbar>
+<div *ngIf="isLoggedIn$ | async; else auth" class="app">
+    <app-toolbar (burgerClicked)="onSidenavTrigger()"></app-toolbar>
 
-    <div className="left-panel">left-panel</div>
-    <div className="content">
-        <router-outlet></router-outlet>
-    </div>
+    <mat-sidenav-container>
+        <mat-sidenav #drawer class="sidenav" mode="side">
+            <app-sidenav></app-sidenav>
+        </mat-sidenav>
+
+        <mat-sidenav-content className="content">
+            <router-outlet></router-outlet>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
 </div>
 
 <ng-template #auth>

@@ -10,6 +10,8 @@ import { MatInputModule } from "@angular/material/input";
 import { MatIconModule, MatIconRegistry } from "@angular/material/icon";
 import { MatButtonModule } from "@angular/material/button";
 import { MatToolbarModule } from "@angular/material/toolbar";
+import { MatSidenavModule } from "@angular/material/sidenav";
+import { MatListModule } from "@angular/material/list";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./components/app/app.component";
@@ -18,6 +20,7 @@ import { CasesComponent } from "./components/cases/cases.component";
 import { FakeBackendInterceptor } from "./interceptors/fake-backend/fake-backend.interceptor";
 import { ToolbarComponent } from "./components/toolbar/toolbar.component";
 import { MainLayoutComponent } from "./components/main-layout/main-layout.component";
+import { SidenavComponent } from "./components/sidenav/sidenav.component";
 
 @NgModule({
     declarations: [
@@ -25,7 +28,8 @@ import { MainLayoutComponent } from "./components/main-layout/main-layout.compon
         LoginComponent,
         CasesComponent,
         ToolbarComponent,
-        MainLayoutComponent
+        MainLayoutComponent,
+        SidenavComponent
     ],
     imports: [
         HttpClientModule,
@@ -38,7 +42,9 @@ import { MainLayoutComponent } from "./components/main-layout/main-layout.compon
         MatIconModule,
         MatButtonModule,
         ReactiveFormsModule,
-        MatToolbarModule
+        MatToolbarModule,
+        MatSidenavModule,
+        MatListModule
     ],
     providers: [
         MatIconRegistry,
