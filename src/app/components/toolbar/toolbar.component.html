@@ -4,6 +4,6 @@
         <span className="client-name">My App</span>
     </div>
     <div className="right">
-        <button mat-button [routerLink]="['/login']">Log out</button>
+        <button mat-button (click)="onLogout()">Log out</button>
     </div>
 </mat-toolbar>

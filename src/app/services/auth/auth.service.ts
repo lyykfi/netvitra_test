@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { BehaviorSubject } from "rxjs";
+import { BehaviorSubject, Observable } from "rxjs";
 import { tap } from "rxjs/operators";
 
 import { User } from "../../models/user";
@@ -35,7 +35,11 @@ export class AuthService {
     }
 
     public logout() {
-        localStorage.removeItem(this.AUTH_TOKEN_ID);
-        this.loggedIn.next(false);
+        return new Observable(observer => {
+            localStorage.removeItem(this.AUTH_TOKEN_ID);
+            this.loggedIn.next(false);
+
+            observer.next(true);
+        });
     }
 }

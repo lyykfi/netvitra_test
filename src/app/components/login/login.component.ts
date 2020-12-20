@@ -27,9 +27,7 @@ export class LoginComponent implements OnInit {
         this.hide = !this.hide;
     }
 
-    ngOnInit(): void {
-        this.authService.logout();
-    }
+    ngOnInit(): void {}
 
     onSubmit() {
         if (this.loginForm.valid) {
