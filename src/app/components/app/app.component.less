@@ -1,7 +1,14 @@
-mat-drawer-container {
-    min-height: 100%;
-}
-
 .app {
     min-height: 100%;
+    display: flex;
+    align-items: stretch;
+    flex-direction: column;
+
+    mat-drawer-container {
+        min-height: 100%;
+    }
+
+    mat-sidenav-container {
+        flex: 1;
+    }
 }
