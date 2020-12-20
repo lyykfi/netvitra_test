@@ -1,4 +1,7 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
+import { FormGroup, FormControl } from "@angular/forms";
+
+import { AuthService } from "../auth.service";
 
 @Component({
     selector: "app-login",
@@ -6,7 +9,23 @@ import { Component, OnInit } from "@angular/core";
     styleUrls: ["./login.component.less"]
 })
 export class LoginComponent implements OnInit {
-    constructor() {}
+    @Input()
+    public hide: boolean = true;
+
+    loginForm = new FormGroup({
+        email: new FormControl(""),
+        password: new FormControl("")
+    });
+
+    constructor(private authService: AuthService) {}
+
+    onChangeHidenState() {
+        this.hide = !this.hide;
+    }
 
     ngOnInit(): void {}
+
+    onSubmit() {
+        this.authService.signIn(this.loginForm.value);
+    }
 }
