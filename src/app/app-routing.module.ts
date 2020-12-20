@@ -5,7 +5,7 @@ import { CasesComponent } from "./cases/cases.component";
 import { LoginComponent } from "./login/login.component";
 
 const routes: Routes = [
-    { path: "", pathMatch: "full", redirectTo: "login" },
+    { path: "", pathMatch: "full", redirectTo: "cases" },
     { path: "login", component: LoginComponent },
     { path: "cases", component: CasesComponent, canActivate: [AuthGuard] }
 ];

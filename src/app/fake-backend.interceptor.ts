@@ -9,7 +9,7 @@ import { HttpHandler } from "@angular/common/http";
 import { HttpEvent } from "@angular/common/http";
 
 const TEST_USER = {
-    email: "text@nv.com",
+    email: "test@nv.com",
     password: "tested"
 };
 

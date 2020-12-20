@@ -12,13 +12,12 @@ import { MatButtonModule } from "@angular/material/button";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
-import { AuthComponent } from "./auth/auth.component";
 import { LoginComponent } from "./login/login.component";
 import { CasesComponent } from "./cases/cases.component";
 import { FakeBackendInterceptor } from "./fake-backend.interceptor";
 
 @NgModule({
-    declarations: [AppComponent, AuthComponent, LoginComponent, CasesComponent],
+    declarations: [AppComponent, LoginComponent, CasesComponent],
     imports: [
         HttpClientModule,
         BrowserModule,

@@ -3,9 +3,8 @@ import { Injectable } from "@angular/core";
 import { tap } from "rxjs/operators";
 
 import { User } from "./user";
-import { environment } from "./../environments/environment";
 
-interface AuthResponse {
+export interface AuthResponse {
     token: string;
 }
 
@@ -18,20 +17,18 @@ export class AuthService {
     constructor(private http: HttpClient) {}
 
     public signIn(userData: User) {
-        return this.http
-            .post<AuthResponse>(`${environment.apiUrl}/login`, userData)
-            .pipe(
-                tap(auth => {
-                    localStorage.setItem(this.AUTH_TOKEN_ID, auth.token);
-                })
-            );
+        return this.http.post<AuthResponse>(`/login`, userData).pipe(
+            tap(auth => {
+                localStorage.setItem(this.AUTH_TOKEN_ID, auth.token);
+            })
+        );
     }
 
     public isLoggedIn() {
-        return localStorage.getItem("ACCESS_TOKEN") !== null;
+        return localStorage.getItem(this.AUTH_TOKEN_ID) !== null;
     }
 
     public logout() {
-        localStorage.removeItem("ACCESS_TOKEN");
+        localStorage.removeItem(this.AUTH_TOKEN_ID);
     }
 }
