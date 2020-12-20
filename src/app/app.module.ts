@@ -16,9 +16,17 @@ import { AppComponent } from "./components/app/app.component";
 import { LoginComponent } from "./components/login/login.component";
 import { CasesComponent } from "./components/cases/cases.component";
 import { FakeBackendInterceptor } from "./interceptors/fake-backend/fake-backend.interceptor";
+import { ToolbarComponent } from "./components/toolbar/toolbar.component";
+import { MainLayoutComponent } from "./components/main-layout/main-layout.component";
 
 @NgModule({
-    declarations: [AppComponent, LoginComponent, CasesComponent],
+    declarations: [
+        AppComponent,
+        LoginComponent,
+        CasesComponent,
+        ToolbarComponent,
+        MainLayoutComponent
+    ],
     imports: [
         HttpClientModule,
         BrowserModule,

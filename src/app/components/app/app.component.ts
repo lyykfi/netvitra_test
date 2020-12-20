@@ -1,4 +1,6 @@
 import { Component } from "@angular/core";
+import { Observable } from "rxjs";
+import { AuthService } from "src/app/services/auth/auth.service";
 
 @Component({
     selector: "app-root",
@@ -6,5 +8,9 @@ import { Component } from "@angular/core";
     styleUrls: ["./app.component.less"]
 })
 export class AppComponent {
-    title = "netvirta-test";
+    isLoggedIn$: Observable<boolean>;
+
+    constructor(private authService: AuthService) {
+        this.isLoggedIn$ = this.authService.isLoggedIn();
+    }
 }

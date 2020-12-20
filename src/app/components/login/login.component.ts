@@ -27,15 +27,19 @@ export class LoginComponent implements OnInit {
         this.hide = !this.hide;
     }
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+        this.authService.logout();
+    }
 
     onSubmit() {
-        this.authService
-            .signIn(this.loginForm.value)
-            .pipe(first())
-            .subscribe({
-                next: () => this.router.navigate(["/"]),
-                error: error => (this.errorMessage = error.error.message)
-            });
+        if (this.loginForm.valid) {
+            this.authService
+                .signIn(this.loginForm.value)
+                .pipe(first())
+                .subscribe({
+                    next: () => this.router.navigate(["/"]),
+                    error: error => (this.errorMessage = error.error.message)
+                });
+        }
     }
 }

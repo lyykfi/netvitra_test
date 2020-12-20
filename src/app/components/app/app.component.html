@@ -1,1 +1,12 @@
-<router-outlet></router-outlet>
+<div className="app" *ngIf="isLoggedIn$ | async; else auth">
+    <app-toolbar></app-toolbar>
+
+    <div className="left-panel">left-panel</div>
+    <div className="content">
+        <router-outlet></router-outlet>
+    </div>
+</div>
+
+<ng-template #auth>
+    <router-outlet></router-outlet>
+</ng-template>
