@@ -1,8 +1,8 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
-import { AuthGuard } from "./auth.guard";
-import { CasesComponent } from "./cases/cases.component";
-import { LoginComponent } from "./login/login.component";
+import { AuthGuard } from "./guards/auth/auth.guard";
+import { CasesComponent } from "./components/cases/cases.component";
+import { LoginComponent } from "./components/login/login.component";
 
 const routes: Routes = [
     { path: "", pathMatch: "full", redirectTo: "cases" },

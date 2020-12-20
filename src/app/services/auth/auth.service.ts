@@ -2,7 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { tap } from "rxjs/operators";
 
-import { User } from "./user";
+import { User } from "../../models/user";
 
 export interface AuthResponse {
     token: string;
