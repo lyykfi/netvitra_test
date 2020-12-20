@@ -1,10 +1,9 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { FormGroup, FormControl } from "@angular/forms";
 import { Router } from "@angular/router";
-import { Observable } from "rxjs";
 import { first } from "rxjs/operators";
 
-import { AuthResponse, AuthService } from "../auth.service";
+import { AuthService } from "../auth.service";
 
 @Component({
     selector: "app-login",
@@ -17,16 +16,12 @@ export class LoginComponent implements OnInit {
 
     public errorMessage: string = "";
 
-    loginForm = new FormGroup({
+    public loginForm = new FormGroup({
         email: new FormControl(""),
         password: new FormControl("")
     });
 
-    formSubmit: Observable<AuthResponse>;
-
-    constructor(private authService: AuthService, private router: Router) {
-        this.formSubmit = new Observable();
-    }
+    constructor(private authService: AuthService, private router: Router) {}
 
     onChangeHidenState() {
         this.hide = !this.hide;
@@ -39,14 +34,8 @@ export class LoginComponent implements OnInit {
             .signIn(this.loginForm.value)
             .pipe(first())
             .subscribe({
-                next: () => {
-                    console.log("123");
-                    this.router.navigate(["/"]);
-                },
-                error: error => {
-                    this.errorMessage = error.error.message;
-                    console.log(this.errorMessage);
-                }
+                next: () => this.router.navigate(["/"]),
+                error: error => (this.errorMessage = error.error.message)
             });
     }
 }
