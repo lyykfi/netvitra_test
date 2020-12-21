@@ -1,3 +1,17 @@
-<mat-card>
-    <app-cases-toolbar-item-status></app-cases-toolbar-item-status>
+<mat-card class="cases-toolbar">
+    <div class="item">
+        <app-cases-toolbar-item-status></app-cases-toolbar-item-status>
+    </div>
+    <div class="item">
+        <app-cases-toolbar-item-country></app-cases-toolbar-item-country>
+    </div>
+    <div class="item reset">
+        <a>Reset filters</a>
+    </div>
+    <div class="item search">
+        <mat-form-field appearance="fill">
+            <mat-label>Search</mat-label>
+            <input matInput #input maxlength="10" />
+        </mat-form-field>
+    </div>
 </mat-card>

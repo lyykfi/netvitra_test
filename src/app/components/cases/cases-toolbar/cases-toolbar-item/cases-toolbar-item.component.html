@@ -1,7 +1,11 @@
-<div>
+<div class="toolbar-item">
     <h2>{{ title }}</h2>
-    <button (click)="toggleFilters()">click</button>
-    <div class="content" *ngIf="showFilters">
+
+    <a class="toggler" (click)="toggleFilters()">
+        {{ selected.length }} {{ selectedTitle }}
+    </a>
+
+    <mat-card class="content" *ngIf="showFilters">
         <ng-content></ng-content>
-    </div>
+    </mat-card>
 </div>

@@ -1,17 +1,16 @@
 <app-cases-toolbar-item
-    title="Status"
+    title="Country"
     selectedTitle="{{
         items.length
             | i18nPlural
                 : {
-                      '=1': 'Status',
-                      other: 'Statuses'
+                      '=1': 'Country',
+                      other: 'Countries'
                   }
     }}"
     [selected]="selectedItems"
 >
     <app-selector
-        [defaultSelectedItems]="defaultSelectedItems"
         (selectItems)="onSelectItems($event)"
         [selectAllTitle]="'All cases'"
         [items]="items"

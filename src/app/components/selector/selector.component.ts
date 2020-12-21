@@ -15,12 +15,15 @@ export interface SelectorItem {
 })
 export class SelectorComponent implements OnInit {
     @Input()
-    items: SelectorItem[];
+    items: SelectorItem[] = [];
+
+    @Input()
+    defaultSelectedItems: SelectedItem[] = [];
 
     @Output() selectItems: EventEmitter<SelectedItem[]> = new EventEmitter();
 
     @Input()
-    selectAllTitle: string;
+    selectAllTitle: string = "";
 
     public selectedItems$ = new BehaviorSubject<SelectedItem[]>([]);
 
@@ -29,9 +32,6 @@ export class SelectorComponent implements OnInit {
     private subscriptions: Subscription[] = [];
 
     constructor() {
-        this.items = [];
-        this.selectAllTitle = "";
-
         this.subscriptions.push(
             this.selectedItems$.subscribe(items => {
                 this.selectItems.emit(items);
@@ -40,7 +40,10 @@ export class SelectorComponent implements OnInit {
         );
     }
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+        console.log(this.defaultSelectedItems);
+        this.selectedItems$.next(this.defaultSelectedItems);
+    }
 
     selectAll() {
         this.selectedItems$.next(
@@ -54,6 +57,11 @@ export class SelectorComponent implements OnInit {
 
     selectItem(value: string | boolean | null) {
         const values = this.selectedItems$.getValue();
+
+        if (this.isAllSelected) {
+            values.length = 0;
+        }
+
         const indexOf = values.indexOf(value);
 
         if (indexOf === -1) {

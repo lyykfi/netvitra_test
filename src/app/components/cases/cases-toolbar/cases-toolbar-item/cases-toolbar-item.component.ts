@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from "@angular/core";
 
+import { SelectedItem } from "./../../../selector/selector.component";
+
 @Component({
     selector: "app-cases-toolbar-item",
     templateUrl: "./cases-toolbar-item.component.html",
@@ -7,15 +9,21 @@ import { Component, Input, OnInit } from "@angular/core";
 })
 export class CasesToolbarItemComponent implements OnInit {
     @Input()
-    title: string | undefined;
+    title: string;
 
     @Input()
-    selected: unknown[] | undefined;
+    selectedTitle: string;
+
+    @Input()
+    selected: SelectedItem[] | undefined;
 
     showFilters: boolean;
 
     constructor() {
         this.showFilters = false;
+
+        this.title = "";
+        this.selectedTitle = "";
     }
 
     ngOnInit(): void {}
