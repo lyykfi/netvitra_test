@@ -1,0 +1,7 @@
+<div>
+    <h2>{{ title }}</h2>
+    <button (click)="toggleFilters()">click</button>
+    <div class="content" *ngIf="showFilters">
+        <ng-content></ng-content>
+    </div>
+</div>
