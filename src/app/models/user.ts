@@ -5,7 +5,7 @@ export class User {
 
     lastName: string = "";
 
-    birthDate: Date = new Date();
+    birthDate: Date | null = null;
 
     country: string = "";
 }

@@ -30,11 +30,15 @@ export class CaseService {
                 const newCases: Case[] = [];
 
                 items.forEach(item => {
+                    const newDate = item.user.birthDate
+                        ? new Date(Date.parse(item.user.birthDate))
+                        : null;
+
                     newCases.push({
                         ...item,
                         user: {
                             ...item.user,
-                            birthDate: new Date(Date.parse(item.user.birthDate))
+                            birthDate: newDate
                         }
                     });
                 });
