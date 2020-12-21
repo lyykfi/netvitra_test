@@ -14,14 +14,14 @@ export class SidenavService {
 
     private links: SideNavItem[] = [
         {
-            title: "Cases",
+            title: $localize`Cases`,
             link: "/"
         },
         {
-            title: "Create"
+            title: $localize`Create`
         },
         {
-            title: "Admin"
+            title: $localize`Admin`
         }
     ];
 
