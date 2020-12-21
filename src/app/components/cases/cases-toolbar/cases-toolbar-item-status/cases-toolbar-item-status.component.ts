@@ -12,16 +12,12 @@ export class CasesToolbarItemStatusComponent implements OnInit {
     constructor() {
         this.items = [
             {
-                title: "ALL",
-                value: null
-            },
-            {
                 title: "Complete",
                 value: true
             },
             {
-                title: "False",
-                value: true
+                title: "Incomplete",
+                value: false
             }
         ];
     }

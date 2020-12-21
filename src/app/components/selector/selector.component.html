@@ -1,5 +1,19 @@
 <div class="selector">
-    <a *ngFor="let item of items">
+    <a
+        *ngIf="selectAllTitle"
+        (click)="selectAll()"
+        [ngClass]="{ active: isAllSelected }"
+    >
+        {{ selectAllTitle }}
+    </a>
+    <a
+        [ngClass]="{
+            active:
+                (selectedItems$ | async)?.includes(item.value) && !isAllSelected
+        }"
+        *ngFor="let item of items"
+        (click)="selectItem(item.value)"
+    >
         {{ item.title }}
     </a>
 </div>
