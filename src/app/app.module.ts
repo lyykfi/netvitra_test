@@ -31,6 +31,7 @@ import { CasesToolbarItemStatusComponent } from "./components/cases/cases-toolba
 import { CasesToolbarItemCountryComponent } from "./components/cases/cases-toolbar/cases-toolbar-item-country/cases-toolbar-item-country.component";
 import { SelectorComponent } from "./components/selector/selector.component";
 import { CasesTableComponent } from "./components/cases/cases-table/cases-table.component";
+import { AlphabetComponent } from "./components/alphabet/alphabet.component";
 
 @NgModule({
     declarations: [
@@ -44,7 +45,8 @@ import { CasesTableComponent } from "./components/cases/cases-table/cases-table.
         CasesToolbarItemStatusComponent,
         CasesToolbarItemCountryComponent,
         SelectorComponent,
-        CasesTableComponent
+        CasesTableComponent,
+        AlphabetComponent
     ],
     imports: [
         HttpClientModule,

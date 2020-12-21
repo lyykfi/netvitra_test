@@ -1,0 +1,12 @@
+<div class="alphabet">
+    <a
+        *ngFor="let char of alphabet"
+        [ngClass]="{
+            active: activeChars.includes(char),
+            selected: (selectedChar$ | async) === char
+        }"
+        (click)="onClickToLetter(char)"
+    >
+        {{ char | uppercase }}
+    </a>
+</div>

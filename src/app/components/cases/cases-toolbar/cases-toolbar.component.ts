@@ -3,6 +3,7 @@ import { SelectedItem } from "src/app/components/selector/selector.component";
 import {
     Component,
     EventEmitter,
+    Input,
     OnInit,
     Output,
     QueryList,
@@ -11,7 +12,8 @@ import {
 import { CasesToolbarItemStatusComponent } from "./cases-toolbar-item-status/cases-toolbar-item-status.component";
 import { CasesToolbarItemCountryComponent } from "./cases-toolbar-item-country/cases-toolbar-item-country.component";
 import { FormControl } from "@angular/forms";
-import { BehaviorSubject, Subscription } from "rxjs";
+import { BehaviorSubject, Subject, Subscription } from "rxjs";
+import { Case } from "src/app/models/case";
 
 export interface CasesFilters {
     state: SelectedItem[];
@@ -31,6 +33,9 @@ export class CasesToolbarComponent implements OnInit {
     searchSub: Subscription;
 
     searchTextControl = new FormControl("");
+
+    @Input()
+    public cases$: Subject<Case[]> = new Subject();
 
     filters = new BehaviorSubject<CasesFilters>({
         state: [],

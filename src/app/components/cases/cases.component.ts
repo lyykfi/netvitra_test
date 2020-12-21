@@ -1,6 +1,6 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 import { AutoUnsubscribe } from "ngx-auto-unsubscribe";
-import { Subject, Subscription } from "rxjs";
+import { Subject } from "rxjs";
 import { Case } from "src/app/models/case";
 import { CaseService } from "src/app/services/case/case.service";
 import { CasesFilters } from "./cases-toolbar/cases-toolbar.component";
@@ -12,19 +12,11 @@ import { CasesFilters } from "./cases-toolbar/cases-toolbar.component";
     styleUrls: ["./cases.component.less"]
 })
 export class CasesComponent implements OnInit {
-    public cases$ = new Subject<Case[]>();
-
-    public filteredSub: Subscription;
-
-    public filteredCases$ = new Subject<Case[]>();
+    public cases$: Subject<Case[]> = new Subject();
 
     public filters$ = new Subject<CasesFilters>();
 
-    constructor(private caseService: CaseService) {
-        this.filteredSub = this.cases$.subscribe(items => {
-            this.filteredCases$.next(items);
-        });
-    }
+    constructor(private caseService: CaseService) {}
 
     ngOnInit(): void {
         this.caseService.getCases().subscribe(items => {

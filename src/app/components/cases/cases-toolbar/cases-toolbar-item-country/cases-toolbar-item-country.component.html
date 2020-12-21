@@ -10,6 +10,10 @@
     }}"
     [selected]="selectedItems"
 >
+    <app-alphabet
+        [activeChars$]="activeChars$"
+        (selectChar)="onSelectChar($event)"
+    ></app-alphabet>
     <app-selector
         (selectItems)="onSelectItems($event)"
         [selectAllTitle]="'All cases'"

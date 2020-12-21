@@ -1,8 +1,10 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
+import { Subject } from "rxjs";
 import {
     SelectedItem,
     SelectorItem
 } from "src/app/components/selector/selector.component";
+import { Case } from "src/app/models/case";
 
 @Component({
     selector: "app-cases-toolbar-item-country",
@@ -10,26 +12,39 @@ import {
     styleUrls: ["./cases-toolbar-item-country.component.less"]
 })
 export class CasesToolbarItemCountryComponent implements OnInit {
-    items: SelectorItem[];
+    items: SelectorItem[] = [
+        {
+            title: "Complete",
+            value: true
+        },
+        {
+            title: "Incomplete",
+            value: false
+        }
+    ];
 
-    selectedItems: SelectedItem[];
+    selectedItems: SelectedItem[] = [];
 
-    constructor() {
-        this.items = [
-            {
-                title: "Complete",
-                value: true
-            },
-            {
-                title: "Incomplete",
-                value: false
-            }
-        ];
+    selectedChar = "";
 
-        this.selectedItems = [];
+    @Input()
+    public cases$ = new Subject<Case[]>();
+
+    public activeChars$ = new Subject<string[]>();
+
+    constructor() {}
+
+    ngOnInit(): void {
+        this.cases$.subscribe(cases => {
+            const chars = new Set<string>([]);
+
+            cases.forEach(item => {
+                chars.add(item.user.country[0].toLocaleLowerCase());
+            });
+
+            this.activeChars$.next(Array.from(chars));
+        });
     }
-
-    ngOnInit(): void {}
 
     onSelectItems($event: SelectedItem[]) {
         this.selectedItems = $event;
@@ -38,4 +53,9 @@ export class CasesToolbarItemCountryComponent implements OnInit {
     close() {}
 
     setDefaultFilter() {}
+
+    onSelectChar($event: string) {
+        this.selectedChar = $event;
+        console.log(this.selectedChar);
+    }
 }
