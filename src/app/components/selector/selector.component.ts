@@ -7,6 +7,7 @@ import {
     Output,
     SimpleChanges
 } from "@angular/core";
+import { AutoUnsubscribe } from "ngx-auto-unsubscribe";
 
 export type SelectedItem = string | boolean | null;
 
@@ -15,6 +16,7 @@ export interface SelectorItem {
     value: SelectedItem;
 }
 
+@AutoUnsubscribe()
 @Component({
     selector: "app-selector",
     templateUrl: "./selector.component.html",
@@ -89,9 +91,5 @@ export class SelectorComponent implements OnInit {
         this.selectedItems$.next(values);
     }
 
-    ngOnDestroy() {
-        this.subscriptions.forEach(item => {
-            item.unsubscribe();
-        });
-    }
+    ngOnDestroy() {}
 }

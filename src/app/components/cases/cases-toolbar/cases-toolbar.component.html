@@ -2,7 +2,7 @@
     <div class="item">
         <app-cases-toolbar-item-status
             #filterComponents
-            (selectItems)="onSelectStatus($event)"
+            (selectItems)="onSelect($event, 'state')"
         ></app-cases-toolbar-item-status>
     </div>
     <div class="item">
@@ -16,7 +16,12 @@
     <div class="item search">
         <mat-form-field appearance="fill">
             <mat-label>Search</mat-label>
-            <input [formControl]="searchText" matInput #input maxlength="10" />
+            <input
+                [formControl]="searchTextControl"
+                matInput
+                #input
+                maxlength="10"
+            />
         </mat-form-field>
     </div>
 </mat-card>

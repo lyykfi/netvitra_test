@@ -26,6 +26,7 @@
     "@angular/router": "~11.0.5",
     "@types/uuid": "^8.3.0",
     "font-awesome": "^4.7.0",
+    "ngx-auto-unsubscribe": "^3.0.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "uuid": "^8.3.2",

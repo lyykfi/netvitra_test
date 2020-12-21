@@ -3,7 +3,9 @@
 
     <a class="toggler" (click)="toggleFilters()">
         {{
-            itemsLength === selected.length ? selectedAllTitle : selected.length
+            itemsLength === selected?.length
+                ? selectedAllTitle
+                : selected?.length
         }}
         {{ selectedTitle }}
     </a>

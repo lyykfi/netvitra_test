@@ -1,32 +1,72 @@
+import { AutoUnsubscribe } from "ngx-auto-unsubscribe";
 import { SelectedItem } from "src/app/components/selector/selector.component";
-import { Component, OnInit, QueryList, ViewChildren } from "@angular/core";
+import {
+    Component,
+    EventEmitter,
+    OnInit,
+    Output,
+    QueryList,
+    ViewChildren
+} from "@angular/core";
 import { CasesToolbarItemStatusComponent } from "./cases-toolbar-item-status/cases-toolbar-item-status.component";
 import { CasesToolbarItemCountryComponent } from "./cases-toolbar-item-country/cases-toolbar-item-country.component";
 import { FormControl } from "@angular/forms";
+import { BehaviorSubject, Subscription } from "rxjs";
 
+interface CasesFilters {
+    state: SelectedItem[];
+    country: SelectedItem[];
+    searchText: string;
+}
+
+@AutoUnsubscribe()
 @Component({
     selector: "app-cases-toolbar",
     templateUrl: "./cases-toolbar.component.html",
     styleUrls: ["./cases-toolbar.component.less"]
 })
 export class CasesToolbarComponent implements OnInit {
-    filters: Record<string, SelectedItem[]> = {
+    filterSub: Subscription;
+
+    searchSub: Subscription;
+
+    searchTextControl = new FormControl("");
+
+    filters = new BehaviorSubject<CasesFilters>({
         state: [],
-        country: []
-    };
+        country: [],
+        searchText: ""
+    });
 
     @ViewChildren("filterComponents") filterComponents!: QueryList<
         CasesToolbarItemStatusComponent | CasesToolbarItemCountryComponent
     >;
 
-    searchText = new FormControl("");
+    @Output() updateFilters: EventEmitter<CasesFilters> = new EventEmitter();
 
-    constructor() {}
+    constructor() {
+        this.filterSub = this.filters.asObservable().subscribe(filters => {
+            this.updateFilters.emit(filters);
+        });
+
+        this.searchSub = this.searchTextControl.valueChanges.subscribe(text => {
+            const filters = this.filters.getValue();
+            this.filters.next({
+                ...filters,
+                searchText: text
+            });
+        });
+    }
 
     ngOnInit(): void {}
 
-    onSelectStatus($event: SelectedItem[]) {
-        this.filters.state = $event;
+    onSelect($event: SelectedItem[], key: string) {
+        const filters = this.filters.getValue();
+
+        this.filters.next({
+            ...filters,
+            [key]: $event
+        });
     }
 
     onReset() {
@@ -35,6 +75,8 @@ export class CasesToolbarComponent implements OnInit {
             filter?.close();
         });
 
-        this.searchText.setValue("");
+        this.searchTextControl.reset();
     }
+
+    ngOnDestroy() {}
 }

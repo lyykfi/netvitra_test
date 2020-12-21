@@ -61,7 +61,67 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                         lastName: "134234",
                         avatar: null,
                         country: "Russia",
-                        birthDate: "17/11/1984"
+                        birthDate: "1984/11/17"
+                    }
+                },
+                {
+                    isComplete: true,
+                    user: {
+                        firstName: "David",
+                        lastName: "Klotzer",
+                        avatar: null,
+                        country: "Germany",
+                        birthDate: null
+                    }
+                },
+                {
+                    isComplete: true,
+                    user: {
+                        firstName: "David",
+                        lastName: "Klotzer",
+                        avatar: null,
+                        country: "Germany",
+                        birthDate: null
+                    }
+                },
+                {
+                    isComplete: true,
+                    user: {
+                        firstName: "fwer",
+                        lastName: "qweq",
+                        avatar: null,
+                        country: "France",
+                        birthDate: null
+                    }
+                },
+                {
+                    isComplete: false,
+                    user: {
+                        firstName: "qsdfsdf",
+                        lastName: "qwe",
+                        avatar: null,
+                        country: "China",
+                        birthDate: "1984/11/17"
+                    }
+                },
+                {
+                    isComplete: false,
+                    user: {
+                        firstName: "123123",
+                        lastName: "134234",
+                        avatar: null,
+                        country: "Russia",
+                        birthDate: "1984/11/17"
+                    }
+                },
+                {
+                    isComplete: false,
+                    user: {
+                        firstName: "er",
+                        lastName: "fewer",
+                        avatar: null,
+                        country: "China",
+                        birthDate: "1984/11/17"
                     }
                 }
             ]);

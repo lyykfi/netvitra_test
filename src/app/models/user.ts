@@ -1,17 +1,11 @@
 export class User {
-    avatar: string | undefined;
+    avatar: string = "";
 
-    firstName: string;
+    firstName: string = "";
 
-    lastName: string;
+    lastName: string = "";
 
-    birthDate: Date | undefined;
+    birthDate: Date = new Date();
 
-    country: string;
-
-    constructor() {
-        this.firstName = "";
-        this.lastName = "";
-        this.country = "";
-    }
+    country: string = "";
 }
