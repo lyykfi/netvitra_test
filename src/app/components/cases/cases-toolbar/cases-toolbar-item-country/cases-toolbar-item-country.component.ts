@@ -1,7 +1,9 @@
 import {
     ChangeDetectorRef,
     Component,
+    ElementRef,
     EventEmitter,
+    HostListener,
     Input,
     OnInit,
     Output,
@@ -39,10 +41,20 @@ export class CasesToolbarItemCountryComponent implements OnInit {
 
     defaultSelectedItems: SelectedItem[] = [];
 
-    constructor(private cdref: ChangeDetectorRef) {}
+    constructor(
+        private cdref: ChangeDetectorRef,
+        private elementRef: ElementRef
+    ) {}
 
     @ViewChild("item")
     private itemComponent: CasesToolbarItemComponent | null = null;
+
+    @HostListener("document:mousedown", ["$event"])
+    onGlobalClick(event: MouseEvent): void {
+        if (!this.elementRef.nativeElement.contains(event.target)) {
+            this.close();
+        }
+    }
 
     ngOnInit(): void {
         this.setDefaultFilter();

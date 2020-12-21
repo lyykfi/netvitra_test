@@ -1,7 +1,9 @@
 import {
     ChangeDetectorRef,
     Component,
+    ElementRef,
     EventEmitter,
+    HostListener,
     OnInit,
     Output,
     ViewChild
@@ -37,7 +39,17 @@ export class CasesToolbarItemStatusComponent implements OnInit {
     @ViewChild("item")
     private itemComponent: CasesToolbarItemComponent | null = null;
 
-    constructor(private cdref: ChangeDetectorRef) {}
+    constructor(
+        private cdref: ChangeDetectorRef,
+        private elementRef: ElementRef
+    ) {}
+
+    @HostListener("document:mousedown", ["$event"])
+    onGlobalClick(event: MouseEvent): void {
+        if (!this.elementRef.nativeElement.contains(event.target)) {
+            this.close();
+        }
+    }
 
     ngOnInit(): void {
         this.setDefaultFilter();
