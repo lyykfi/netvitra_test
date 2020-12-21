@@ -34,6 +34,7 @@ export class SelectorComponent implements OnInit {
     @Input()
     selectAllTitle: string = "";
 
+    @Input()
     public selectedItems$ = new BehaviorSubject<SelectedItem[]>([]);
 
     public isAllSelected = false;

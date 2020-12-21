@@ -137,7 +137,6 @@ export class CasesToolbarItemCountryComponent implements OnInit {
     }
 
     onDeleteItem(item: SelectedItem) {
-        console.log(item);
         const selectedItems = this.selectedItems$.getValue();
         const indexOf = selectedItems.indexOf(item);
 
