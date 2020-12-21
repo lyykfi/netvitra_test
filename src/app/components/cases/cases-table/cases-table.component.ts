@@ -6,6 +6,14 @@ import { Subject, Subscription } from "rxjs";
 import { Case } from "src/app/models/case";
 import { MatSort } from "@angular/material/sort";
 
+interface CaseTableItem {
+    firstName: string;
+    lastName: string;
+    birthDate: Date | null;
+    country: string;
+    isComplete: boolean;
+}
+
 @AutoUnsubscribe()
 @Component({
     selector: "app-cases-table",
@@ -27,7 +35,6 @@ export class CasesTableComponent implements OnInit {
     @ViewChild(MatSort, { static: false }) set elemOnSortHTML(
         elemOnHTML: MatSort
     ) {
-        console.log(elemOnHTML);
         if (!!elemOnHTML) {
             this.datasource.sort = elemOnHTML;
         }
@@ -39,13 +46,13 @@ export class CasesTableComponent implements OnInit {
         "select",
         "firstName",
         "lastName",
-        "bithDate",
+        "birthDate",
         "country",
-        "status",
+        "isComplete",
         "actions"
     ];
 
-    datasource: MatTableDataSource<Case> = new MatTableDataSource();
+    datasource: MatTableDataSource<CaseTableItem> = new MatTableDataSource();
 
     datasourceSub: Subscription | undefined;
 
@@ -53,7 +60,15 @@ export class CasesTableComponent implements OnInit {
 
     ngOnInit(): void {
         this.datasourceSub = this.cases?.subscribe(items => {
-            this.datasource.data = items;
+            this.datasource.data = items.map(item => {
+                return {
+                    isComplete: item.isComplete,
+                    firstName: item.user.firstName,
+                    lastName: item.user.lastName,
+                    birthDate: item.user.birthDate,
+                    country: item.user.country
+                };
+            });
         });
     }
 

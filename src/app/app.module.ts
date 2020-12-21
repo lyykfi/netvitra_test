@@ -16,6 +16,7 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatTableModule } from "@angular/material/table";
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatPaginatorModule } from "@angular/material/paginator";
+import { MatSortModule } from "@angular/material/sort";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./components/app/app.component";
@@ -62,7 +63,8 @@ import { CasesTableComponent } from "./components/cases/cases-table/cases-table.
         MatProgressSpinnerModule,
         MatTableModule,
         MatCheckboxModule,
-        MatPaginatorModule
+        MatPaginatorModule,
+        MatSortModule
     ],
     providers: [
         MatIconRegistry,
