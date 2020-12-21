@@ -35,7 +35,7 @@ export class CasesToolbarComponent implements OnInit {
     searchTextControl = new FormControl("");
 
     @Input()
-    public cases$ = new BehaviorSubject<Case[]>([]);
+    public cases$ = new BehaviorSubject<Case[] | null>([]);
 
     filters = new BehaviorSubject<CasesFilters>({
         state: [],

@@ -1,7 +1,7 @@
 <app-cases-toolbar-item
     title="Country"
     selectedTitle="{{
-        (selectedItems$ | async).length
+        selectedItems.length
             | i18nPlural
                 : {
                       '=1': 'Country',
@@ -10,7 +10,7 @@
     }}"
     [itemsLength]="allItemsLength"
     #item
-    [selected]="selectedItems$ | async"
+    [selected]="selectedItems"
 >
     <app-alphabet
         [activeChars$]="activeChars$"
@@ -19,11 +19,11 @@
     <app-selector
         [defaultSelectedItems]="defaultSelectedItems"
         (selectItems)="onSelectItems($event)"
-        [items]="items$ | async"
+        [items]="items"
     ></app-selector>
 
     <div class="items">
-        <span class="item" *ngFor="let item of selectedItems$ | async">
+        <span class="item" *ngFor="let item of selectedItems">
             <span>{{ item }} </span>
             <mat-icon (click)="onDeleteItem(item)">cancel</mat-icon>
         </span>

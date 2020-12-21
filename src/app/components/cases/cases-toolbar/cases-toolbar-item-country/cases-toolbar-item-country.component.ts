@@ -30,6 +30,8 @@ export class CasesToolbarItemCountryComponent implements OnInit {
 
     selectedItems$ = new BehaviorSubject<SelectedItem[]>([]);
 
+    selectedItems: SelectedItem[] = [];
+
     selectedChar = "";
 
     @Input()
@@ -63,6 +65,10 @@ export class CasesToolbarItemCountryComponent implements OnInit {
 
         this.items$.subscribe(items => {
             this.items = items;
+        });
+
+        this.selectedItems$.subscribe(selectedItems => {
+            this.selectedItems = selectedItems;
         });
 
         this.cases$.subscribe(cases => {
@@ -130,7 +136,8 @@ export class CasesToolbarItemCountryComponent implements OnInit {
         this.selectedChar$.next($event);
     }
 
-    onDeleteItem(item: string) {
+    onDeleteItem(item: SelectedItem) {
+        console.log(item);
         const selectedItems = this.selectedItems$.getValue();
         const indexOf = selectedItems.indexOf(item);
 
