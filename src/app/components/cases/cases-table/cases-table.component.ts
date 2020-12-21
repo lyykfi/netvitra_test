@@ -5,6 +5,7 @@ import { AutoUnsubscribe } from "ngx-auto-unsubscribe";
 import { Subject, Subscription } from "rxjs";
 import { Case } from "src/app/models/case";
 import { MatSort } from "@angular/material/sort";
+import { CasesFilters } from "../cases-toolbar/cases-toolbar.component";
 
 interface CaseTableItem {
     firstName: string;
@@ -23,6 +24,9 @@ interface CaseTableItem {
 export class CasesTableComponent implements OnInit {
     @Input()
     public cases: Subject<Case[]> | null = null;
+
+    @Input()
+    public filters = new Subject<CasesFilters>();
 
     @ViewChild(MatPaginator, { static: false }) set elemOnHTML(
         elemOnHTML: MatPaginator
@@ -56,6 +60,8 @@ export class CasesTableComponent implements OnInit {
 
     datasourceSub: Subscription | undefined;
 
+    filtersSub: Subscription | undefined;
+
     constructor() {}
 
     ngOnInit(): void {
@@ -70,6 +76,40 @@ export class CasesTableComponent implements OnInit {
                 };
             });
         });
+
+        this.filtersSub = this.filters.subscribe(items => {
+            this.datasource.filter = JSON.stringify(items);
+        });
+    }
+
+    ngAfterViewInit() {
+        this.datasource.filterPredicate = (data, filter) => {
+            const filters: CasesFilters = JSON.parse(filter);
+            filters.searchText = filters.searchText.trim().toLocaleLowerCase();
+
+            let isValid = filters.searchText ? false : true;
+
+            if (filters.searchText) {
+                const props: (keyof CaseTableItem)[] = [
+                    "firstName",
+                    "lastName",
+                    "country"
+                ];
+
+                props.forEach(prop => {
+                    if (
+                        (data[prop] as string)
+                            .trim()
+                            .toLocaleLowerCase()
+                            .includes(filters.searchText)
+                    ) {
+                        isValid = true;
+                    }
+                });
+            }
+
+            return isValid;
+        };
     }
 
     ngOnDestroy() {}

@@ -1,4 +1,9 @@
 <div>
-    <app-cases-toolbar></app-cases-toolbar>
-    <app-cases-table [cases]="filteredCases$"></app-cases-table>
+    <app-cases-toolbar
+        (updateFilters)="updateFilters($event)"
+    ></app-cases-toolbar>
+    <app-cases-table
+        [cases]="filteredCases$"
+        [filters]="filters$"
+    ></app-cases-table>
 </div>

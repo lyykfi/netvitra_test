@@ -13,7 +13,7 @@ import { CasesToolbarItemCountryComponent } from "./cases-toolbar-item-country/c
 import { FormControl } from "@angular/forms";
 import { BehaviorSubject, Subscription } from "rxjs";
 
-interface CasesFilters {
+export interface CasesFilters {
     state: SelectedItem[];
     country: SelectedItem[];
     searchText: string;

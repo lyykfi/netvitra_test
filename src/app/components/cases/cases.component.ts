@@ -3,6 +3,7 @@ import { AutoUnsubscribe } from "ngx-auto-unsubscribe";
 import { Subject, Subscription } from "rxjs";
 import { Case } from "src/app/models/case";
 import { CaseService } from "src/app/services/case/case.service";
+import { CasesFilters } from "./cases-toolbar/cases-toolbar.component";
 
 @AutoUnsubscribe()
 @Component({
@@ -17,6 +18,8 @@ export class CasesComponent implements OnInit {
 
     public filteredCases$ = new Subject<Case[]>();
 
+    public filters$ = new Subject<CasesFilters>();
+
     constructor(private caseService: CaseService) {
         this.filteredSub = this.cases$.subscribe(items => {
             this.filteredCases$.next(items);
@@ -30,4 +33,8 @@ export class CasesComponent implements OnInit {
     }
 
     ngOnDestroy() {}
+
+    updateFilters($event: CasesFilters) {
+        this.filters$.next($event);
+    }
 }
