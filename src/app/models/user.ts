@@ -8,4 +8,6 @@ export class User {
     birthDate: Date | null = null;
 
     country: string = "";
+
+    phoneNumber: string = "";
 }

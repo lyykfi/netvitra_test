@@ -6,6 +6,8 @@ import { BehaviorSubject, Subject, Subscription } from "rxjs";
 import { Case } from "src/app/models/case";
 import { MatSort } from "@angular/material/sort";
 import { CasesFilters } from "../cases-toolbar/cases-toolbar.component";
+import { MatDialog } from "@angular/material/dialog";
+import { CaseEditDialogComponent } from "../case-edit-dialog/case-edit-dialog.component";
 
 interface CaseTableItem {
     firstName: string;
@@ -13,6 +15,7 @@ interface CaseTableItem {
     birthDate: Date | null;
     country: string;
     isComplete: boolean;
+    id: number;
 }
 
 @AutoUnsubscribe()
@@ -64,7 +67,7 @@ export class CasesTableComponent implements OnInit {
 
     filtersSub: Subscription | undefined;
 
-    constructor() {}
+    constructor(public dialog: MatDialog) {}
 
     ngOnInit(): void {
         this.datasourceSub = this.cases$.subscribe(items => {
@@ -74,7 +77,8 @@ export class CasesTableComponent implements OnInit {
                     firstName: item.user.firstName,
                     lastName: item.user.lastName,
                     birthDate: item.user.birthDate,
-                    country: item.user.country
+                    country: item.user.country,
+                    id: item.id
                 };
             });
 
@@ -135,4 +139,21 @@ export class CasesTableComponent implements OnInit {
     }
 
     ngOnDestroy() {}
+
+    onShowModal(id: number) {
+        const caseItem = this.cases?.find(item => {
+            return item.id === id;
+        });
+
+        if (caseItem) {
+            const dialogRef = this.dialog.open(CaseEditDialogComponent, {
+                width: "650px",
+                data: caseItem
+            });
+
+            dialogRef.afterClosed().subscribe(result => {
+                console.log("The dialog was closed");
+            });
+        }
+    }
 }

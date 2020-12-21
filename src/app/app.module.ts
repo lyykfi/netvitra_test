@@ -17,6 +17,9 @@ import { MatTableModule } from "@angular/material/table";
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatPaginatorModule } from "@angular/material/paginator";
 import { MatSortModule } from "@angular/material/sort";
+import { MatDialogModule } from "@angular/material/dialog";
+import { MatDatepickerModule } from "@angular/material/datepicker";
+import { MatNativeDateModule } from "@angular/material/core";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./components/app/app.component";
@@ -32,6 +35,7 @@ import { CasesToolbarItemCountryComponent } from "./components/cases/cases-toolb
 import { SelectorComponent } from "./components/selector/selector.component";
 import { CasesTableComponent } from "./components/cases/cases-table/cases-table.component";
 import { AlphabetComponent } from "./components/alphabet/alphabet.component";
+import { CaseEditDialogComponent } from "./components/cases/case-edit-dialog/case-edit-dialog.component";
 
 @NgModule({
     declarations: [
@@ -46,7 +50,8 @@ import { AlphabetComponent } from "./components/alphabet/alphabet.component";
         CasesToolbarItemCountryComponent,
         SelectorComponent,
         CasesTableComponent,
-        AlphabetComponent
+        AlphabetComponent,
+        CaseEditDialogComponent
     ],
     imports: [
         HttpClientModule,
@@ -66,7 +71,10 @@ import { AlphabetComponent } from "./components/alphabet/alphabet.component";
         MatTableModule,
         MatCheckboxModule,
         MatPaginatorModule,
-        MatSortModule
+        MatSortModule,
+        MatDialogModule,
+        MatDatepickerModule,
+        MatNativeDateModule
     ],
     providers: [
         MatIconRegistry,
@@ -74,7 +82,8 @@ import { AlphabetComponent } from "./components/alphabet/alphabet.component";
             provide: HTTP_INTERCEPTORS,
             useClass: FakeBackendInterceptor,
             multi: true
-        }
+        },
+        MatNativeDateModule
     ],
     bootstrap: [AppComponent]
 })

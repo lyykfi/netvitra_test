@@ -1,0 +1,49 @@
+<h1 mat-dialog-title>
+    Edit "{{ data.user.firstName }} {{ data.user.lastName }}" Detail
+</h1>
+
+<div mat-dialog-content>
+    <form [formGroup]="editForm">
+        <mat-form-field appearance="fill">
+            <mat-label>First Name</mat-label>
+            <input
+                [formControl]="editForm.controls['firstName']"
+                matInput
+                required
+            />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Last Name</mat-label>
+            <input
+                [formControl]="editForm.controls['lastName']"
+                matInput
+                required
+            />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Phone number</mat-label>
+            <input [formControl]="editForm.controls['phoneNumber']" matInput />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Birth date</mat-label>
+            <input
+                [matDatepicker]="picker"
+                [formControl]="editForm.controls['birthDate']"
+                matInput
+            />
+
+            <mat-datepicker-toggle
+                matSuffix
+                [for]="picker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+    </form>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Cancel</button>
+    <button mat-button cdkFocusInitial color="primary">Update Account</button>
+</div>

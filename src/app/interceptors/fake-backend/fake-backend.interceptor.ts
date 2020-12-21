@@ -55,6 +55,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         function cases() {
             return ok([
                 {
+                    id: 1,
                     isComplete: false,
                     user: {
                         firstName: "123123",
@@ -65,6 +66,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     }
                 },
                 {
+                    id: 2,
                     isComplete: true,
                     user: {
                         firstName: "David",
@@ -75,6 +77,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     }
                 },
                 {
+                    id: 3,
                     isComplete: true,
                     user: {
                         firstName: "Denic",
@@ -85,6 +88,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     }
                 },
                 {
+                    id: 4,
                     isComplete: false,
                     user: {
                         firstName: "David",
@@ -95,6 +99,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     }
                 },
                 {
+                    id: 5,
                     isComplete: true,
                     user: {
                         firstName: "fwer",
@@ -105,6 +110,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     }
                 },
                 {
+                    id: 6,
                     isComplete: false,
                     user: {
                         firstName: "qsdfsdf",
@@ -115,6 +121,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     }
                 },
                 {
+                    id: 7,
                     isComplete: false,
                     user: {
                         firstName: "123123",
@@ -125,6 +132,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     }
                 },
                 {
+                    id: 8,
                     isComplete: false,
                     user: {
                         firstName: "er",
