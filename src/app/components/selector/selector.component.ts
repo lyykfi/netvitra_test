@@ -44,7 +44,10 @@ export class SelectorComponent implements OnInit {
         this.subscriptions.push(
             this.selectedItems$.subscribe(items => {
                 this.selectItems.emit(items);
-                this.isAllSelected = items.length === this.items.length;
+
+                if (this.selectAllTitle) {
+                    this.isAllSelected = items.length === this.items.length;
+                }
             })
         );
     }

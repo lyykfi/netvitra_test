@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from "@angular/core";
-import { Subject } from "rxjs";
+import { BehaviorSubject, Subject } from "rxjs";
 import {
     SelectedItem,
     SelectorItem
@@ -12,29 +12,27 @@ import { Case } from "src/app/models/case";
     styleUrls: ["./cases-toolbar-item-country.component.less"]
 })
 export class CasesToolbarItemCountryComponent implements OnInit {
-    items: SelectorItem[] = [
-        {
-            title: "Complete",
-            value: true
-        },
-        {
-            title: "Incomplete",
-            value: false
-        }
-    ];
+    public items$ = new BehaviorSubject<SelectorItem[]>([]);
+    public items: SelectorItem[] = [];
 
     selectedItems: SelectedItem[] = [];
 
     selectedChar = "";
 
     @Input()
-    public cases$ = new Subject<Case[]>();
+    public cases$ = new BehaviorSubject<Case[]>([]);
 
     public activeChars$ = new Subject<string[]>();
+
+    public selectedChar$ = new Subject<string>();
 
     constructor() {}
 
     ngOnInit(): void {
+        this.items$.subscribe(items => {
+            this.items = items;
+        });
+
         this.cases$.subscribe(cases => {
             const chars = new Set<string>([]);
 
@@ -43,6 +41,28 @@ export class CasesToolbarItemCountryComponent implements OnInit {
             });
 
             this.activeChars$.next(Array.from(chars));
+        });
+
+        this.selectedChar$.subscribe(char => {
+            const cases = this.cases$.getValue();
+            const countries = new Set<string>([]);
+
+            cases.forEach(item => {
+                if (item.user.country[0].toLocaleLowerCase() === char) {
+                    countries.add(item.user.country);
+                }
+            });
+
+            console.log(countries);
+
+            this.items$.next(
+                Array.from(countries).map(country => {
+                    return {
+                        title: country,
+                        value: country
+                    };
+                })
+            );
         });
     }
 
@@ -55,7 +75,6 @@ export class CasesToolbarItemCountryComponent implements OnInit {
     setDefaultFilter() {}
 
     onSelectChar($event: string) {
-        this.selectedChar = $event;
-        console.log(this.selectedChar);
+        this.selectedChar$.next($event);
     }
 }

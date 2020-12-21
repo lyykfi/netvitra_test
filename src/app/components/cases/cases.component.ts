@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { AutoUnsubscribe } from "ngx-auto-unsubscribe";
-import { Subject } from "rxjs";
+import { BehaviorSubject, Subject } from "rxjs";
 import { Case } from "src/app/models/case";
 import { CaseService } from "src/app/services/case/case.service";
 import { CasesFilters } from "./cases-toolbar/cases-toolbar.component";
@@ -12,7 +12,7 @@ import { CasesFilters } from "./cases-toolbar/cases-toolbar.component";
     styleUrls: ["./cases.component.less"]
 })
 export class CasesComponent implements OnInit {
-    public cases$: Subject<Case[]> = new Subject();
+    public cases$ = new BehaviorSubject<Case[]>([]);
 
     public filters$ = new Subject<CasesFilters>();
 

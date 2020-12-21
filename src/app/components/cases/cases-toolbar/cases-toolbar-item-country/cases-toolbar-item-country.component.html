@@ -1,7 +1,7 @@
 <app-cases-toolbar-item
     title="Country"
     selectedTitle="{{
-        items.length
+        selectedItems.length
             | i18nPlural
                 : {
                       '=1': 'Country',
@@ -16,7 +16,6 @@
     ></app-alphabet>
     <app-selector
         (selectItems)="onSelectItems($event)"
-        [selectAllTitle]="'All cases'"
-        [items]="items"
+        [items]="items$ | async"
     ></app-selector>
 </app-cases-toolbar-item>
