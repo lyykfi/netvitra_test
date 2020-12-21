@@ -9,26 +9,28 @@ import { SelectedItem } from "./../../../selector/selector.component";
 })
 export class CasesToolbarItemComponent implements OnInit {
     @Input()
-    title: string;
+    title: string = "";
 
     @Input()
-    selectedTitle: string;
+    selectedTitle: string = "";
+
+    @Input()
+    itemsLength = 0;
 
     @Input()
     selected: SelectedItem[] | undefined;
 
-    showFilters: boolean;
+    showFilters: boolean = false;
 
-    constructor() {
-        this.showFilters = false;
-
-        this.title = "";
-        this.selectedTitle = "";
-    }
+    selectedAllTitle: string = "All";
 
     ngOnInit(): void {}
 
     toggleFilters() {
         this.showFilters = !this.showFilters;
+    }
+
+    close() {
+        this.showFilters = false;
     }
 }

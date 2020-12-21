@@ -2,7 +2,10 @@
     <h2>{{ title }}</h2>
 
     <a class="toggler" (click)="toggleFilters()">
-        {{ selected.length }} {{ selectedTitle }}
+        {{
+            itemsLength === selected.length ? selectedAllTitle : selected.length
+        }}
+        {{ selectedTitle }}
     </a>
 
     <mat-card class="content" *ngIf="showFilters">

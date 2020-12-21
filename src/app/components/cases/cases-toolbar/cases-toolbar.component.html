@@ -1,12 +1,17 @@
 <mat-card class="cases-toolbar">
     <div class="item">
-        <app-cases-toolbar-item-status></app-cases-toolbar-item-status>
+        <app-cases-toolbar-item-status
+            #filterComponents
+            (selectItems)="onSelectStatus($event)"
+        ></app-cases-toolbar-item-status>
     </div>
     <div class="item">
-        <app-cases-toolbar-item-country></app-cases-toolbar-item-country>
+        <app-cases-toolbar-item-country
+            #filterComponents
+        ></app-cases-toolbar-item-country>
     </div>
     <div class="item reset">
-        <a>Reset filters</a>
+        <a (click)="onReset()">Reset filters</a>
     </div>
     <div class="item search">
         <mat-form-field appearance="fill">

@@ -34,4 +34,8 @@ export class CasesToolbarItemCountryComponent implements OnInit {
     onSelectItems($event: SelectedItem[]) {
         this.selectedItems = $event;
     }
+
+    close() {}
+
+    setDefaultFilter() {}
 }

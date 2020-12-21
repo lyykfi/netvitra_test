@@ -1,5 +1,12 @@
 import { BehaviorSubject, Subscription } from "rxjs";
-import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import {
+    Component,
+    EventEmitter,
+    Input,
+    OnInit,
+    Output,
+    SimpleChanges
+} from "@angular/core";
 
 export type SelectedItem = string | boolean | null;
 
@@ -41,8 +48,7 @@ export class SelectorComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        console.log(this.defaultSelectedItems);
-        this.selectedItems$.next(this.defaultSelectedItems);
+        this.setDefaultValues();
     }
 
     selectAll() {
@@ -53,6 +59,16 @@ export class SelectorComponent implements OnInit {
                   })
                 : []
         );
+    }
+
+    setDefaultValues() {
+        this.selectedItems$.next(this.defaultSelectedItems);
+    }
+
+    ngOnChanges(changes: SimpleChanges) {
+        if (changes.defaultSelectedItems) {
+            this.setDefaultValues();
+        }
     }
 
     selectItem(value: string | boolean | null) {

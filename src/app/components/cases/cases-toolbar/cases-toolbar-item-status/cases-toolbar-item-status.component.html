@@ -1,7 +1,8 @@
 <app-cases-toolbar-item
+    #item
     title="Status"
     selectedTitle="{{
-        items.length
+        selectedItems.length
             | i18nPlural
                 : {
                       '=1': 'Status',
@@ -9,6 +10,7 @@
                   }
     }}"
     [selected]="selectedItems"
+    [itemsLength]="items.length"
 >
     <app-selector
         [defaultSelectedItems]="defaultSelectedItems"
