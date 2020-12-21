@@ -26,7 +26,9 @@ export class CasesToolbarItemCountryComponent implements OnInit {
     public items$ = new BehaviorSubject<SelectorItem[]>([]);
     public items: SelectorItem[] = [];
 
-    selectedItems: SelectedItem[] = [];
+    public allItemsLength = 0;
+
+    selectedItems$ = new BehaviorSubject<SelectedItem[]>([]);
 
     selectedChar = "";
 
@@ -74,6 +76,8 @@ export class CasesToolbarItemCountryComponent implements OnInit {
 
             this.activeChars$.next(Array.from(chars));
             this.defaultSelectedItems = Array.from(allCountries);
+
+            this.allItemsLength = Array.from(allCountries).length;
         });
 
         this.selectedChar$.subscribe(char => {
@@ -95,11 +99,14 @@ export class CasesToolbarItemCountryComponent implements OnInit {
                 })
             );
         });
+
+        this.selectedItems$.subscribe(items => {
+            this.selectItems.emit(items);
+        });
     }
 
     onSelectItems($event: SelectedItem[]) {
-        this.selectedItems = $event;
-        this.selectItems.emit($event);
+        this.selectedItems$.next($event);
     }
 
     close() {
@@ -121,5 +128,18 @@ export class CasesToolbarItemCountryComponent implements OnInit {
 
     onSelectChar($event: string) {
         this.selectedChar$.next($event);
+    }
+
+    onDeleteItem(item: string) {
+        const selectedItems = this.selectedItems$.getValue();
+        const indexOf = selectedItems.indexOf(item);
+
+        selectedItems.splice(indexOf, 1);
+
+        this.selectedItems$.next([...selectedItems]);
+    }
+
+    ngAfterContentChecked() {
+        this.cdref.detectChanges();
     }
 }
