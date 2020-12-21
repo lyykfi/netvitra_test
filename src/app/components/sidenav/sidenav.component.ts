@@ -1,4 +1,8 @@
 import { Component, OnInit } from "@angular/core";
+import {
+    SideNavItem,
+    SidenavService
+} from "src/app/services/sidenav/sidenav.service";
 
 @Component({
     selector: "app-sidenav",
@@ -6,20 +10,11 @@ import { Component, OnInit } from "@angular/core";
     styleUrls: ["./sidenav.component.less"]
 })
 export class SidenavComponent implements OnInit {
-    constructor() {}
+    links: SideNavItem[];
 
-    links = [
-        {
-            title: "Cases",
-            link: "/"
-        },
-        {
-            title: "Create"
-        },
-        {
-            title: "Admin"
-        }
-    ];
+    constructor(sidenavService: SidenavService) {
+        this.links = sidenavService.getItems();
+    }
 
     ngOnInit(): void {}
 }

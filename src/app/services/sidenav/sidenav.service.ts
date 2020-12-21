@@ -1,11 +1,29 @@
 import { Injectable } from "@angular/core";
 import { MatDrawer } from "@angular/material/sidenav";
 
+export interface SideNavItem {
+    title: string;
+    link?: string;
+}
+
 @Injectable({
     providedIn: "root"
 })
 export class SidenavService {
     private drawer: MatDrawer | null = null;
+
+    private links: SideNavItem[] = [
+        {
+            title: "Cases",
+            link: "/"
+        },
+        {
+            title: "Create"
+        },
+        {
+            title: "Admin"
+        }
+    ];
 
     constructor() {}
 
@@ -14,7 +32,10 @@ export class SidenavService {
     }
 
     public toggle(): void {
-        console.log(this.drawer);
         this.drawer?.toggle();
+    }
+
+    public getItems() {
+        return this.links;
     }
 }
