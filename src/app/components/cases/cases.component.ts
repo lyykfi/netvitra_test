@@ -20,7 +20,6 @@ export class CasesComponent implements OnInit {
 
     ngOnInit(): void {
         this.caseService.getCases().subscribe(items => {
-            console.log(items);
             this.cases$.next(items);
         });
     }

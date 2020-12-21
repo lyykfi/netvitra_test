@@ -33,7 +33,7 @@ export class CasesToolbarItemCountryComponent implements OnInit {
 
     @Output() selectItems: EventEmitter<SelectedItem[]> = new EventEmitter();
 
-    public activeChars$ = new Subject<string[]>();
+    public activeChars$ = new BehaviorSubject<string[]>([]);
 
     public selectedChar$ = new Subject<string>();
 
