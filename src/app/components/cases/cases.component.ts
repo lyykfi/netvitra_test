@@ -12,7 +12,7 @@ import { CasesFilters } from "./cases-toolbar/cases-toolbar.component";
     styleUrls: ["./cases.component.less"]
 })
 export class CasesComponent implements OnInit {
-    public cases$ = new BehaviorSubject<Case[]>([]);
+    public cases$ = new BehaviorSubject<Case[] | null>(null);
 
     public filters$ = new Subject<CasesFilters>();
 
@@ -20,6 +20,7 @@ export class CasesComponent implements OnInit {
 
     ngOnInit(): void {
         this.caseService.getCases().subscribe(items => {
+            console.log(items);
             this.cases$.next(items);
         });
     }

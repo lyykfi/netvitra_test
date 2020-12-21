@@ -2,7 +2,7 @@ import { Component, Input, OnInit, ViewChild } from "@angular/core";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatTableDataSource } from "@angular/material/table";
 import { AutoUnsubscribe } from "ngx-auto-unsubscribe";
-import { Subject, Subscription } from "rxjs";
+import { BehaviorSubject, Subject, Subscription } from "rxjs";
 import { Case } from "src/app/models/case";
 import { MatSort } from "@angular/material/sort";
 import { CasesFilters } from "../cases-toolbar/cases-toolbar.component";
@@ -23,7 +23,9 @@ interface CaseTableItem {
 })
 export class CasesTableComponent implements OnInit {
     @Input()
-    public cases: Subject<Case[]> | null = null;
+    public cases$ = new BehaviorSubject<Case[] | null>(null);
+
+    public cases: Case[] | null = null;
 
     @Input()
     public filters = new Subject<CasesFilters>();
@@ -65,8 +67,8 @@ export class CasesTableComponent implements OnInit {
     constructor() {}
 
     ngOnInit(): void {
-        this.datasourceSub = this.cases?.subscribe(items => {
-            this.datasource.data = items.map(item => {
+        this.datasourceSub = this.cases$.subscribe(items => {
+            this.datasource.data = (items ?? []).map(item => {
                 return {
                     isComplete: item.isComplete,
                     firstName: item.user.firstName,
@@ -75,6 +77,8 @@ export class CasesTableComponent implements OnInit {
                     country: item.user.country
                 };
             });
+
+            this.cases = items;
         });
 
         this.filtersSub = this.filters.subscribe(items => {
@@ -114,6 +118,14 @@ export class CasesTableComponent implements OnInit {
                 const states = filters.state;
 
                 if (!states.includes(data.isComplete)) {
+                    isValid = false;
+                }
+            }
+
+            if (isValid && filters.country.length) {
+                const countries = filters.country;
+
+                if (!countries.includes(data.country)) {
                     isValid = false;
                 }
             }

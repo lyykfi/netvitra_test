@@ -1,4 +1,4 @@
-import { Subject } from "rxjs";
+import { BehaviorSubject, Subject } from "rxjs";
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 
 @Component({
@@ -12,7 +12,7 @@ export class AlphabetComponent implements OnInit {
     @Output() selectChar: EventEmitter<string> = new EventEmitter();
 
     @Input()
-    public activeChars$: Subject<string[]> = new Subject();
+    public activeChars$ = new BehaviorSubject<string[]>([]);
 
     public activeChars: string[] = [];
 
@@ -32,6 +32,8 @@ export class AlphabetComponent implements OnInit {
     }
 
     onClickToLetter(char: string) {
-        this.selectedChar$.next(char);
+        if (this.activeChars$.getValue().includes(char)) {
+            this.selectedChar$.next(char);
+        }
     }
 }

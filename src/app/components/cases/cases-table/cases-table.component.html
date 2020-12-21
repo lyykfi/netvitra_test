@@ -1,5 +1,5 @@
 <mat-card class="cases-table">
-    <div *ngIf="cases | async; else loading">
+    <div *ngIf="cases; else loading">
         <table
             mat-table
             [dataSource]="datasource"

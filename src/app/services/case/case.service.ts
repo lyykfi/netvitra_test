@@ -18,7 +18,7 @@ interface CaseResponse extends Omit<Case, "user"> {
     providedIn: "root"
 })
 export class CaseService {
-    private cases$ = new BehaviorSubject<Case[]>([]);
+    private cases$ = new BehaviorSubject<Case[] | null>(null);
 
     constructor(private http: HttpClient) {}
 

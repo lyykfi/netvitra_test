@@ -8,6 +8,7 @@
     <div class="item">
         <app-cases-toolbar-item-country
             [cases$]="cases$"
+            (selectItems)="onSelect($event, 'country')"
             #filterComponents
         ></app-cases-toolbar-item-country>
     </div>
