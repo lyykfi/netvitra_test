@@ -2,6 +2,7 @@ import { SelectedItem } from "src/app/components/selector/selector.component";
 import { Component, OnInit, QueryList, ViewChildren } from "@angular/core";
 import { CasesToolbarItemStatusComponent } from "./cases-toolbar-item-status/cases-toolbar-item-status.component";
 import { CasesToolbarItemCountryComponent } from "./cases-toolbar-item-country/cases-toolbar-item-country.component";
+import { FormControl } from "@angular/forms";
 
 @Component({
     selector: "app-cases-toolbar",
@@ -18,6 +19,8 @@ export class CasesToolbarComponent implements OnInit {
         CasesToolbarItemStatusComponent | CasesToolbarItemCountryComponent
     >;
 
+    searchText = new FormControl("");
+
     constructor() {}
 
     ngOnInit(): void {}
@@ -31,5 +34,7 @@ export class CasesToolbarComponent implements OnInit {
             filter?.setDefaultFilter();
             filter?.close();
         });
+
+        this.searchText.setValue("");
     }
 }

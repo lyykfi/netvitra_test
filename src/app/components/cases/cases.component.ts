@@ -1,4 +1,8 @@
+import { tap } from "rxjs/operators";
 import { Component, OnInit } from "@angular/core";
+import { Subject } from "rxjs";
+import { Case } from "src/app/models/case";
+import { CaseService } from "src/app/services/case/case.service";
 
 @Component({
     selector: "app-cases",
@@ -6,7 +10,13 @@ import { Component, OnInit } from "@angular/core";
     styleUrls: ["./cases.component.less"]
 })
 export class CasesComponent implements OnInit {
-    constructor() {}
+    public cases$ = new Subject<Case[]>();
 
-    ngOnInit(): void {}
+    constructor(private caseService: CaseService) {}
+
+    ngOnInit(): void {
+        this.caseService.getCases().subscribe(items => {
+            this.cases$.next(items);
+        });
+    }
 }

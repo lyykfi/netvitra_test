@@ -12,6 +12,7 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatSidenavModule } from "@angular/material/sidenav";
 import { MatListModule } from "@angular/material/list";
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./components/app/app.component";
@@ -25,6 +26,7 @@ import { CasesToolbarItemComponent } from "./components/cases/cases-toolbar/case
 import { CasesToolbarItemStatusComponent } from "./components/cases/cases-toolbar/cases-toolbar-item-status/cases-toolbar-item-status.component";
 import { CasesToolbarItemCountryComponent } from "./components/cases/cases-toolbar/cases-toolbar-item-country/cases-toolbar-item-country.component";
 import { SelectorComponent } from "./components/selector/selector.component";
+import { CasesTableComponent } from "./components/cases/cases-table/cases-table.component";
 
 @NgModule({
     declarations: [
@@ -37,7 +39,8 @@ import { SelectorComponent } from "./components/selector/selector.component";
         CasesToolbarItemComponent,
         CasesToolbarItemStatusComponent,
         CasesToolbarItemCountryComponent,
-        SelectorComponent
+        SelectorComponent,
+        CasesTableComponent
     ],
     imports: [
         HttpClientModule,
@@ -52,7 +55,8 @@ import { SelectorComponent } from "./components/selector/selector.component";
         ReactiveFormsModule,
         MatToolbarModule,
         MatSidenavModule,
-        MatListModule
+        MatListModule,
+        MatProgressSpinnerModule
     ],
     providers: [
         MatIconRegistry,

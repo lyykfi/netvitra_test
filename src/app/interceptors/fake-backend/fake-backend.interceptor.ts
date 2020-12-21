@@ -33,6 +33,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             switch (true) {
                 case url.endsWith("/login") && method === "POST":
                     return authenticate(body);
+                case url.endsWith("/cases") && method === "GET":
+                    return cases();
                 default:
                     return next.handle(request);
             }
@@ -48,6 +50,21 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             } else {
                 return error("Username or password is incorrect");
             }
+        }
+
+        function cases() {
+            return ok([
+                {
+                    isComplete: false,
+                    user: {
+                        firstName: "123123",
+                        lastName: "134234",
+                        avatar: null,
+                        country: "Russia",
+                        birthDate: "17/11/1984"
+                    }
+                }
+            ]);
         }
 
         function ok(body: {}) {

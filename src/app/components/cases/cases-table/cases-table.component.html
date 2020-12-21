@@ -1,0 +1,10 @@
+<mat-card class="cases-table">
+    {{ cases$ }}
+    <div *ngIf="cases$ | async; else loading">contenct</div>
+
+    <ng-template #loading>
+        <div class="loader">
+            <mat-spinner></mat-spinner>
+        </div>
+    </ng-template>
+</mat-card>
