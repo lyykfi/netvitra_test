@@ -3,7 +3,7 @@ import { Injectable } from "@angular/core";
 import { BehaviorSubject, Observable } from "rxjs";
 import { tap } from "rxjs/operators";
 
-import { User } from "../../models/user";
+import { Account } from "../../models/account";
 
 export interface AuthResponse {
     token: string;
@@ -21,8 +21,8 @@ export class AuthService {
         this.loggedIn.next(localStorage.getItem(this.AUTH_TOKEN_ID) !== null);
     }
 
-    public signIn(userData: User) {
-        return this.http.post<AuthResponse>(`/login`, userData).pipe(
+    public signIn(account: Account) {
+        return this.http.post<AuthResponse>(`/login`, account).pipe(
             tap(auth => {
                 localStorage.setItem(this.AUTH_TOKEN_ID, auth.token);
                 this.loggedIn.next(true);
