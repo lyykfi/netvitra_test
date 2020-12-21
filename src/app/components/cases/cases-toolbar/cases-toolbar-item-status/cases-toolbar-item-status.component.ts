@@ -31,11 +31,13 @@ export class CasesToolbarItemStatusComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.setDefaultFilter();
+    }
+
+    setDefaultFilter() {
         this.defaultSelectedItems = this.items.map(item => {
             return item.value;
         });
-
-        console.log(this.defaultSelectedItems);
     }
 
     onSelectItems($event: SelectedItem[]) {
