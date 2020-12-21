@@ -75,7 +75,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     }
                 },
                 {
-                    isComplete: true,
+                    isComplete: false,
                     user: {
                         firstName: "David",
                         lastName: "Klotzer",

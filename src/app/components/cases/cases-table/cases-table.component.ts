@@ -85,9 +85,9 @@ export class CasesTableComponent implements OnInit {
     ngAfterViewInit() {
         this.datasource.filterPredicate = (data, filter) => {
             const filters: CasesFilters = JSON.parse(filter);
-            filters.searchText = filters.searchText.trim().toLocaleLowerCase();
+            filters.searchText = filters.searchText?.trim().toLocaleLowerCase();
 
-            let isValid = filters.searchText ? false : true;
+            let isValid = false;
 
             if (filters.searchText) {
                 const props: (keyof CaseTableItem)[] = [
@@ -106,6 +106,16 @@ export class CasesTableComponent implements OnInit {
                         isValid = true;
                     }
                 });
+            } else {
+                isValid = true;
+            }
+
+            if (isValid && filters.state.length) {
+                const states = filters.state;
+
+                if (!states.includes(data.isComplete)) {
+                    isValid = false;
+                }
             }
 
             return isValid;
