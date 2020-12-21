@@ -6,32 +6,24 @@
     <form [formGroup]="editForm">
         <mat-form-field appearance="fill">
             <mat-label>First Name</mat-label>
-            <input
-                [formControl]="editForm.controls['firstName']"
-                matInput
-                required
-            />
+            <input formControlName="firstName" matInput required />
         </mat-form-field>
 
         <mat-form-field appearance="fill">
             <mat-label>Last Name</mat-label>
-            <input
-                [formControl]="editForm.controls['lastName']"
-                matInput
-                required
-            />
+            <input formControlName="lastName" matInput required />
         </mat-form-field>
 
         <mat-form-field appearance="fill">
             <mat-label>Phone number</mat-label>
-            <input [formControl]="editForm.controls['phoneNumber']" matInput />
+            <input formControlName="phoneNumber" matInput />
         </mat-form-field>
 
         <mat-form-field appearance="fill">
             <mat-label>Birth date</mat-label>
             <input
                 [matDatepicker]="picker"
-                [formControl]="editForm.controls['birthDate']"
+                formControlName="birthDate"
                 matInput
             />
 
@@ -45,5 +37,13 @@
 </div>
 <div mat-dialog-actions>
     <button mat-button (click)="onNoClick()">Cancel</button>
-    <button mat-button cdkFocusInitial color="primary">Update Account</button>
+    <button
+        mat-button
+        [disabled]="editForm.invalid"
+        cdkFocusInitial
+        color="primary"
+        (click)="onUpdate()"
+    >
+        Update Account
+    </button>
 </div>

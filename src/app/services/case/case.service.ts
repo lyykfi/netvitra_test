@@ -48,4 +48,20 @@ export class CaseService {
 
         return this.cases$;
     }
+
+    public updateCaseById(id: number, caseItem: Case) {
+        this.cases$.next(null);
+
+        this.http
+            .post<void>(`/cases`, {
+                id,
+                item: caseItem
+            })
+            .pipe(first())
+            .subscribe(() => {
+                this.getCases();
+            });
+
+        return this.cases$;
+    }
 }

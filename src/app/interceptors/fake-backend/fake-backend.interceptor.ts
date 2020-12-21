@@ -13,6 +13,97 @@ const TEST_USER = {
     password: "tested"
 };
 
+const mockData = [
+    {
+        id: 1,
+        isComplete: false,
+        user: {
+            firstName: "123123",
+            lastName: "134234",
+            avatar: null,
+            country: "Russia",
+            birthDate: "1984/11/17"
+        }
+    },
+    {
+        id: 2,
+        isComplete: true,
+        user: {
+            firstName: "David",
+            lastName: "Klotzer",
+            avatar: null,
+            country: "Germany",
+            birthDate: null
+        }
+    },
+    {
+        id: 3,
+        isComplete: true,
+        user: {
+            firstName: "Denic",
+            lastName: "Kosticus",
+            avatar: null,
+            country: "Greece",
+            birthDate: null
+        }
+    },
+    {
+        id: 4,
+        isComplete: false,
+        user: {
+            firstName: "David",
+            lastName: "Klotzer",
+            avatar: null,
+            country: "Germany",
+            birthDate: null
+        }
+    },
+    {
+        id: 5,
+        isComplete: true,
+        user: {
+            firstName: "fwer",
+            lastName: "qweq",
+            avatar: null,
+            country: "France",
+            birthDate: null
+        }
+    },
+    {
+        id: 6,
+        isComplete: false,
+        user: {
+            firstName: "qsdfsdf",
+            lastName: "qwe",
+            avatar: null,
+            country: "China",
+            birthDate: "1984/11/17"
+        }
+    },
+    {
+        id: 7,
+        isComplete: false,
+        user: {
+            firstName: "123123",
+            lastName: "134234",
+            avatar: null,
+            country: "Russia",
+            birthDate: "1984/11/17"
+        }
+    },
+    {
+        id: 8,
+        isComplete: false,
+        user: {
+            firstName: "er",
+            lastName: "fewer",
+            avatar: null,
+            country: "China",
+            birthDate: "1984/11/17"
+        }
+    }
+];
+
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
     constructor() {}
@@ -35,6 +126,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     return authenticate(body);
                 case url.endsWith("/cases") && method === "GET":
                     return cases();
+                case url.endsWith("/cases") && method === "POST":
+                    return updateCase(body);
                 default:
                     return next.handle(request);
             }
@@ -52,97 +145,20 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             }
         }
 
+        function updateCase(body: any) {
+            const { item, id } = body;
+
+            const indexOf = mockData.findIndex(data => data.id === id);
+            mockData[indexOf].user = {
+                ...mockData[indexOf].user,
+                ...item
+            };
+
+            return ok({});
+        }
+
         function cases() {
-            return ok([
-                {
-                    id: 1,
-                    isComplete: false,
-                    user: {
-                        firstName: "123123",
-                        lastName: "134234",
-                        avatar: null,
-                        country: "Russia",
-                        birthDate: "1984/11/17"
-                    }
-                },
-                {
-                    id: 2,
-                    isComplete: true,
-                    user: {
-                        firstName: "David",
-                        lastName: "Klotzer",
-                        avatar: null,
-                        country: "Germany",
-                        birthDate: null
-                    }
-                },
-                {
-                    id: 3,
-                    isComplete: true,
-                    user: {
-                        firstName: "Denic",
-                        lastName: "Kosticus",
-                        avatar: null,
-                        country: "Greece",
-                        birthDate: null
-                    }
-                },
-                {
-                    id: 4,
-                    isComplete: false,
-                    user: {
-                        firstName: "David",
-                        lastName: "Klotzer",
-                        avatar: null,
-                        country: "Germany",
-                        birthDate: null
-                    }
-                },
-                {
-                    id: 5,
-                    isComplete: true,
-                    user: {
-                        firstName: "fwer",
-                        lastName: "qweq",
-                        avatar: null,
-                        country: "France",
-                        birthDate: null
-                    }
-                },
-                {
-                    id: 6,
-                    isComplete: false,
-                    user: {
-                        firstName: "qsdfsdf",
-                        lastName: "qwe",
-                        avatar: null,
-                        country: "China",
-                        birthDate: "1984/11/17"
-                    }
-                },
-                {
-                    id: 7,
-                    isComplete: false,
-                    user: {
-                        firstName: "123123",
-                        lastName: "134234",
-                        avatar: null,
-                        country: "Russia",
-                        birthDate: "1984/11/17"
-                    }
-                },
-                {
-                    id: 8,
-                    isComplete: false,
-                    user: {
-                        firstName: "er",
-                        lastName: "fewer",
-                        avatar: null,
-                        country: "China",
-                        birthDate: "1984/11/17"
-                    }
-                }
-            ]);
+            return ok(mockData);
         }
 
         function ok(body: {}) {

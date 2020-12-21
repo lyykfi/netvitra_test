@@ -150,10 +150,6 @@ export class CasesTableComponent implements OnInit {
                 width: "650px",
                 data: caseItem
             });
-
-            dialogRef.afterClosed().subscribe(result => {
-                console.log("The dialog was closed");
-            });
         }
     }
 }
